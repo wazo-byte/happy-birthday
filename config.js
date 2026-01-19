@@ -1,4 +1,4 @@
-{
+var config = {
   "greeting": "Ellour !!!!",
   "name": "Alysia",
   "greetingText": "I really like you btw please don't tell Saqiena :p",
@@ -20,4 +20,4 @@
   "outroText": "Okay, now call me if you like it or LIKE it :p ",
   "replayText": "Or click, if you want to watch it again.",
   "outroSmiley": ":)"
-}
+};

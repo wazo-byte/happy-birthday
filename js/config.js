@@ -16,7 +16,7 @@ var config = {
   "smiley": ":)",
   "bigTextPart1": "S",
   "bigTextPart2": "O",
-  "wishHeading": "Happy Last teen birthday!!!",
+  "wishHeading": "Happy Last Teen !!!",
   "outroText": "Okay, now call me if you like it or LIKE it :p ",
   "replayText": "Or click, if you want to watch it again.",
   "outroSmiley": ":)",
