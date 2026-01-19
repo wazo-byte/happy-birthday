@@ -3,6 +3,9 @@ const fetchData = () => {
   fetch("customize.json")
     .then(data => data.json())
     .then(data => {
+      // Make config available globally
+      window.config = data;
+      
       dataArr = Object.keys(data);
       dataArr.map(customData => {
         if (data[customData] !== "") {
@@ -16,12 +19,107 @@ const fetchData = () => {
         }
 
         // Check if the iteration is over
-        // Run amimation if so
+        // Run animation if so
         if ( dataArr.length === dataArr.indexOf(customData) + 1 ) {
+          // Setup audio first
+          setupAudio();
+          // Then start animation
           animationTimeline();
         } 
       });
     });
+};
+
+// Audio control functions
+const setupAudio = () => {
+  // Create audio element if it doesn't exist
+  let audio = document.getElementById('birthdayAudio');
+  
+  if (!audio) {
+    audio = document.createElement('audio');
+    audio.id = 'birthdayAudio';
+    audio.loop = true;
+    
+    const source = document.createElement('source');
+    source.src = window.config?.audioFile || 'audio/hBd.mp3';
+    source.type = 'audio/mpeg';
+    
+    audio.appendChild(source);
+    document.body.appendChild(audio);
+  }
+  
+  // Set volume (default to 0.5 if not specified)
+  audio.volume = window.config?.audioVolume || 0.5;
+  
+  // Try to play audio (may require user interaction on some browsers)
+  const playAudio = () => {
+    if (window.config?.audioEnabled !== false) {
+      audio.play().catch(error => {
+        console.log('Autoplay prevented:', error);
+        // Show a play button if autoplay is blocked
+        createPlayButton();
+      });
+    }
+  };
+  
+  // Create play button if autoplay is blocked
+  const createPlayButton = () => {
+    // Check if button already exists
+    if (document.getElementById('audioPlayBtn')) return;
+    
+    const playBtn = document.createElement('button');
+    playBtn.id = 'audioPlayBtn';
+    playBtn.innerHTML = '🎵 Play Birthday Music';
+    playBtn.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-family: 'Work Sans', sans-serif;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+      transition: all 0.3s ease;
+    `;
+    
+    // Add hover effect
+    playBtn.addEventListener('mouseenter', () => {
+      playBtn.style.transform = 'scale(1.05)';
+      playBtn.style.boxShadow = '0 6px 20px rgba(255, 105, 180, 0.4)';
+    });
+    
+    playBtn.addEventListener('mouseleave', () => {
+      playBtn.style.transform = 'scale(1)';
+      playBtn.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.3)';
+    });
+    
+    playBtn.addEventListener('click', () => {
+      audio.play();
+      playBtn.style.display = 'none';
+    });
+    
+    document.body.appendChild(playBtn);
+  };
+  
+  // Play audio when animation starts
+  if (window.config?.playAudioOnStart !== false) {
+    // Delay slightly to let page load
+    setTimeout(playAudio, 1000);
+  }
+  
+  // Also restart audio when replaying animation
+  const replayBtn = document.getElementById('replay');
+  if (replayBtn) {
+    replayBtn.addEventListener('click', () => {
+      audio.currentTime = 0;
+      playAudio();
+    });
+  }
 };
 
 // Animation Timeline
@@ -209,7 +307,7 @@ const animationTimeline = () => {
       0.2
     )
     .from(
-      ".alysia-dp",
+      ".Alysia-dp",  
       0.5,
       {
         scale: 3.5,

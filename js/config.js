@@ -1,0 +1,28 @@
+var config = {
+  "greeting": "Ellour !!!!",
+  "name": "Alysia",
+  "greetingText": "I really like you btw please don't tell Saqiena :p",
+  "wishText": " Insha Allah your journey shall be filled with success, happiness, and endless blessings.",
+  "imagePath": "img/Alysia.jpeg",
+  "text1": "It's your birthday!!! :D",
+  "textInChatBox": "Happy birthday to you!! and to many more blah blah ...",
+  "sendButtonLabel": "Send",
+  "text2": "That's what I was going to do.",
+  "text3": "But then,I stopped.",
+  "text4": "I realised, I wanted to do something",
+  "text4Adjective": "special",
+  "text5Entry": "Because,",
+  "text5Content": "You only deserve the best.",
+  "smiley": ":)",
+  "bigTextPart1": "S",
+  "bigTextPart2": "O",
+  "wishHeading": "Happy Last teen birthday!!!",
+  "outroText": "Okay, now call me if you like it or LIKE it :p ",
+  "replayText": "Or click, if you want to watch it again.",
+  "outroSmiley": ":)",
+
+ "audioEnabled": true,
+  "audioFile": "audio/hBd.mp3",
+  "audioVolume": 0.5, // 0.0 to 1.0
+  "playAudioOnStart": true
+};
